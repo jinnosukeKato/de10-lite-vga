@@ -60,6 +60,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MAX10_CLK1_50
 #============================================================
 # VGA
 #============================================================
+# TODO なんか間違ってるんじゃないかな
 set_location_assignment PIN_AA1 -to VGA_R[0]
 set_location_assignment PIN_V1 -to VGA_R[1]
 set_location_assignment PIN_Y2 -to VGA_R[2]

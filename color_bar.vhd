@@ -45,62 +45,73 @@ begin
 	-- Counting horizontal sync timing
 	h_sync_count: process(clk_25MHz)
 	begin
-		if h_sync_counter = 799 then
-			h_sync_counter <= (others => '0');
-		elsif rising_edge(clk_25MHz) then
-			h_sync_counter <= h_sync_counter + 1;
+		if rising_edge(clk_25MHz) then
+			if h_sync_counter = 799 then
+				h_sync_counter <= (others => '0');
+			else
+				h_sync_counter <= h_sync_counter + 1;
+			end if;
 		end if;
 	end process h_sync_count;
 
 	-- Generate horizontal sync signal
 	gen_h_sync: process(clk_25MHz)
 	begin
-		-- Horizontal sync pulse is active high for the first 96 counts
-		if (h_sync_counter < 96) then
-			h_sync_internal <= '0';
-		else
-			h_sync_internal <= '1';
+		if rising_edge(clk_25MHz) then
+			if (h_sync_counter < 96) then
+				h_sync_internal <= '0';
+			else
+				h_sync_internal <= '1';
+			end if;
 		end if;
 	end process gen_h_sync;
 
 	h_display_output: process(clk_25MHz)
 	begin
-		if (h_sync_counter >= 144 and h_sync_counter < 784) then
-			h_display <= '1'; -- Display area
-		else
-			h_display <= '0'; -- Non-display area
+		if rising_edge(clk_25MHz) then
+			if (h_sync_counter >= 144 and h_sync_counter < 784) then
+				h_display <= '1'; -- Display area
+			else
+				h_display <= '0'; -- Non-display area
+			end if;
 		end if;
 	end process h_display_output;
 
 
 	-- Counting the horizontal lines for vertical sync timing
-	v_sync_count: process(h_sync_internal)
+	v_sync_count: process(clk_25MHz)
 	begin
-		if rising_edge(h_sync_internal) then
-			if v_sync_counter = 520 then
-				v_sync_counter <= (others => '0');
-			else
-				v_sync_counter <= v_sync_counter + 1;
+		if rising_edge(clk_25MHz) then
+			if h_sync_counter = 96 then -- Only update when a line ends
+				if v_sync_counter = 520 then
+					v_sync_counter <= (others => '0');
+				else
+					v_sync_counter <= v_sync_counter + 1;
+				end if;
 			end if;
 		end if;
 	end process v_sync_count;
 
 	-- Generate vertical sync signal
-	gen_v_sync: process(v_sync_internal)
+	gen_v_sync: process(clk_25MHz)
 	begin
-		if (v_sync_counter < 2) then
-			v_sync_internal <= '0';
-		else
-			v_sync_internal <= '1';
+		if rising_edge(clk_25MHz) then
+			if (v_sync_counter < 2) then
+				v_sync_internal <= '0';
+			else
+				v_sync_internal <= '1';
+			end if;
 		end if;
 	end process gen_v_sync;
 
-	v_display_output: process(h_sync_internal)
+	v_display_output: process(clk_25MHz)
 	begin
-		if (v_sync_counter >= 31 and v_sync_counter < 511) then
-			v_display <= '1'; -- Display area
-		else
-			v_display <= '0'; -- Non-display area
+		if rising_edge(clk_25MHz) then
+			if (v_sync_counter >= 31 and v_sync_counter < 511) then
+				v_display <= '1'; -- Display area
+			else
+				v_display <= '0'; -- Non-display area
+			end if;
 		end if;
 	end process v_display_output;
 
