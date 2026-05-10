@@ -24,13 +24,25 @@
 */
 var NAVTREE =
 [
-  [ "de10-lite-vga", "index.html", ]
+  [ "de10-lite-vga", "index.html", [
+    [ "Design Units", "annotated.html", [
+      [ "Design Unit List", "annotated.html", "annotated_dup" ],
+      [ "Design Unit Index", "classes.html", null ],
+      [ "Design Unit Hierarchy", "hierarchy.html", null ],
+      [ "Design Unit Members", "functions.html", [
+        [ "全て", "functions.html", null ],
+        [ "Functions/Procedures/Processes", "functions_func.html", null ],
+        [ "変数", "functions_vars.html", null ]
+      ] ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"annotated.html"
 ];
 
 var SYNCONMSG = 'クリックで同期表示が無効になります';
 var SYNCOFFMSG = 'クリックで同期表示が有効になります';
+var LISTOFALLMEMBERS = '全メンバ一覧';
