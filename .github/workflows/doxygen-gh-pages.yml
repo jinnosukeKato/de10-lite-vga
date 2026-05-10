@@ -16,3 +16,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           config_file: Doxyfile
           folder: docs/html
+          doxygen_version: 1.16.1
