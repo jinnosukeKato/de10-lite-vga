@@ -3,6 +3,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 
 --! DE10-LiteのVGA端子へ640x480 60Hzのモードでカラーバーを出力するモジュール
 entity de10_lite_vga is
@@ -17,27 +18,52 @@ entity de10_lite_vga is
 end de10_lite_vga;
 
 architecture RTL of de10_lite_vga is
-  component color_bar
+  component vga_driver is
     port (
-      clk    : in std_logic;
-      red    : out std_logic_vector(3 downto 0);
-      green  : out std_logic_vector(3 downto 0);
-      blue   : out std_logic_vector(3 downto 0);
-      v_sync : out std_logic;
-      h_sync : out std_logic
+      clk            : in std_logic;
+      rgb            : in std_logic_vector(2 downto 0);
+      vertical_pos   : out unsigned(9 downto 0);
+      horizontal_pos : out unsigned(9 downto 0);
+      red            : out std_logic_vector(3 downto 0);
+      green          : out std_logic_vector(3 downto 0);
+      blue           : out std_logic_vector(3 downto 0);
+      v_sync         : out std_logic;
+      h_sync         : out std_logic
     );
   end component;
 
+  component color_bar is
+    port (
+      horizontal_pos : in unsigned(9 downto 0);
+      vertical_pos   : in unsigned(9 downto 0);
+      rgb            : out std_logic_vector(2 downto 0)
+    );
+  end component;
+
+  signal horizontal_pos : unsigned(9 downto 0); --! 描画する水平座標
+  signal vertical_pos   : unsigned(9 downto 0); --! 描画する垂直座標
+  signal rgb            : std_logic_vector(2 downto 0); --! 座標に対応したRGB信号の内部表現 各々1ビットでR,G,Bの順
 begin
-  --! color_barモジュールをインスタンス化し，DE10-LiteのクロックとVGA信号ポートに接続する
+  --! vga_driverモジュールをインスタンス化し，DE10-LiteのクロックとVGA信号ポートに接続する
+  u_vga_driver : vga_driver
+  port map
+  (
+    clk            => MAX10_CLK1_50,
+    rgb            => rgb,
+    vertical_pos   => vertical_pos,
+    horizontal_pos => horizontal_pos,
+    red            => VGA_R,
+    green          => VGA_G,
+    blue           => VGA_B,
+    v_sync         => VGA_VS,
+    h_sync         => VGA_HS
+  );
+
   u_color_bar : color_bar
   port map
   (
-    clk    => MAX10_CLK1_50,
-    red    => VGA_R,
-    green  => VGA_G,
-    blue   => VGA_B,
-    v_sync => VGA_VS,
-    h_sync => VGA_HS
+    horizontal_pos => horizontal_pos,
+    vertical_pos   => vertical_pos,
+    rgb            => rgb
   );
 end RTL;
