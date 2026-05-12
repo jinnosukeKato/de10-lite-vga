@@ -1,6 +1,8 @@
 *.bak
 *.rpt
 *.summary
+*.qws
+
 output_files/
 db/
 incremental_db/
