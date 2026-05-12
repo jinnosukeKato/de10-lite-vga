@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['gen_5fh_5fsync_0',['gen_h_sync',['../classcolor__bar_1_1RTL.html#a1e6b90084fbefa9ac85720e34c155c2f',1,'color_bar::RTL']]],
-  ['gen_5fv_5fsync_1',['gen_v_sync',['../classcolor__bar_1_1RTL.html#a1d489e073b179e66f26a6287996bc685',1,'color_bar::RTL']]],
-  ['generate_5fclk_2',['generate_clk',['../classcolor__bar_1_1RTL.html#a84cc6872a304bd0f4651033db8219556',1,'color_bar::RTL']]]
+  ['h_5fdisplay_5foutput_0',['h_display_output',['../classvga__driver_1_1RTL.html#a3ada38dbe32a2ac8f29898eeda05d7ba',1,'vga_driver::RTL']]],
+  ['h_5fsync_5fcount_1',['h_sync_count',['../classvga__driver_1_1RTL.html#aee89247dc60ac1ed4218f4842281af62',1,'vga_driver::RTL']]]
 ];

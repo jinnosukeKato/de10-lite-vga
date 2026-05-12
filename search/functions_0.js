@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['color_5fbar_0',['color_bar',['../classcolor__bar_1_1RTL.html#a1c861ec6baa7f9c0ba90646eddcd40a9',1,'color_bar::RTL']]]
+  ['gen_5fh_5fsync_0',['gen_h_sync',['../classvga__driver_1_1RTL.html#a1e6b90084fbefa9ac85720e34c155c2f',1,'vga_driver::RTL']]],
+  ['gen_5fv_5fsync_1',['gen_v_sync',['../classvga__driver_1_1RTL.html#a1d489e073b179e66f26a6287996bc685',1,'vga_driver::RTL']]],
+  ['generate_5fclk_2',['generate_clk',['../classvga__driver_1_1RTL.html#a84cc6872a304bd0f4651033db8219556',1,'vga_driver::RTL']]]
 ];
