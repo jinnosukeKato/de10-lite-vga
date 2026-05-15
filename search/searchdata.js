@@ -2,7 +2,7 @@ var indexSectionsWithContent =
 {
   0: "abcdfghimprtv",
   1: "cdrv",
-  2: "ghpv",
+  2: "ghv",
   3: "abcfghimprtv"
 };
 
