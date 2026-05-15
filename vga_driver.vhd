@@ -116,8 +116,7 @@ begin
       if h_sync_counter_internal = 96 then
         -- 垂直同期 2 + バックポーチ 25 + 上ボータ 8 + 表示エリア 480 + 下ボーダ 8 + フロントポーチ 2 = 525
         -- 525クロックで垂直同期信号が1周期する
-        -- ...はずだが，この実装では520クロックでリセットしてる，本をもう一度読んでその真意を確認する必要がありそう
-        if v_sync_counter_internal = 520 then
+        if v_sync_counter_internal = 525 then
           v_sync_counter_internal <= (others => '0');
         else
           v_sync_counter_internal <= v_sync_counter_internal + 1;
@@ -145,9 +144,7 @@ begin
     if rising_edge(clk_25MHz) then
       -- 垂直同期 2 + バックポーチ 25 + 上ボータ 8 = 35クロック目から表示エリアが開始
       -- 表示エリアは480クロック続くので，35 + 480 = 515クロック目まで表示エリア
-      -- ...のはずだが，この実装では510クロック目までを表示エリアとしている
-      -- 恐らく520クロックでリセットする関係だと思われる
-      if (v_sync_counter_internal >= 31 and v_sync_counter_internal < 511) then
+      if (v_sync_counter_internal >= 35 and v_sync_counter_internal < 515) then
         v_display <= '1'; -- 表示エリア
       else
         v_display <= '0'; -- 非表示エリア
