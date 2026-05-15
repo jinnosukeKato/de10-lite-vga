@@ -1,10 +1,11 @@
 --! @author Jinnosuke KATO
---! @brief 文字を出力するモジュール
+--! @brief 文字出力を制御するモジュール
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 
+--! 文字出力を制御するモジュール
 entity character_controller is
   port (
     clk            : in std_logic; --! クロック信号

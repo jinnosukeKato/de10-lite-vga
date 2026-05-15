@@ -22,24 +22,26 @@ end character_generator;
 architecture RTL of character_generator is
   type font_rom_type is array (0 to 128 * 8 - 1) of std_logic_vector(7 downto 0); --! 8x8ドットのビットマップを128文字分格納するROM
 
-  signal font_rom         : font_rom_type;
-  attribute ram_init_file : string;
-  -- Quartus用のメモリ初期化ファイル(.mif)を属性として指定する
-  attribute ram_init_file of font_rom : signal is "font/font.mif";
+  signal font_rom                          : font_rom_type; --! フォントROM
+  attribute font_rom_init_attr             : string; --! フォントROM初期化ファイルの属性
+  attribute font_rom_init_attr of font_rom : signal is "font/font.mif"; -- Quartus用のメモリ初期化ファイル(.mif)を属性として指定し，フォントROMを初期化
 
-  signal char_addr : integer range 0 to 1023;
-  signal ram_q     : std_logic_vector(7 downto 0);
-  signal col_reg   : unsigned(2 downto 0);
+  signal font_row_addr : integer range 0 to 1023;
+  signal font_row      : std_logic_vector(7 downto 0);
+  signal font_col      : unsigned(2 downto 0);
 begin
-  char_addr <= to_integer(unsigned(ascii_code)) * 8 + to_integer(row); --! 文字の描画するピクセルのアドレスを計算
-  pixel_on  <= '1' when ram_q(7 - to_integer(col_reg)) = '1' else
+  -- フォントの描画する行のアドレスを計算
+  font_row_addr <= to_integer(unsigned(ascii_code)) * 8 + to_integer(row);
+
+  -- ROMから取り出したフォントの行データから描画する列のビットを取り出してpixel_on信号に出力する
+  pixel_on <= '1' when font_row(7 - to_integer(font_col)) = '1' else
     '0';
 
   process (clk)
   begin
     if rising_edge(clk) then
-      ram_q   <= font_rom(char_addr);
-      col_reg <= col;
+      font_row <= font_rom(font_row_addr);
+      font_col <= col;
     end if;
   end process;
 end architecture RTL;

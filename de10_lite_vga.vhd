@@ -45,7 +45,7 @@ architecture RTL of de10_lite_vga is
   signal vertical_pos   : unsigned(9 downto 0); --! 描画する垂直座標
   signal rgb            : std_logic_vector(2 downto 0); --! 座標に対応したRGB信号の内部表現 各々1ビットでR,G,Bの順
 begin
-  --! vga_driverモジュールをインスタンス化し，DE10-LiteのクロックとVGA信号ポートに接続する
+  --! vga_driverモジュールのインスタンス
   u_vga_driver : vga_driver
   port map
   (
@@ -60,6 +60,7 @@ begin
     h_sync         => VGA_HS
   );
 
+  --! 文字表示を制御するモジュールのインスタンス
   u_character_controller : character_controller
   port map
   (
