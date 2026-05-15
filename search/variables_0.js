@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['blue_0',['blue',['../classvga__driver.html#a7555760a6ca1a2855f889f279e016e89',1,'vga_driver']]]
+  ['ascii_5fcode_0',['ascii_code',['../classcharacter__generator.html#a1d78a12add5ee3429eb9f507aee91e8a',1,'character_generator']]]
 ];

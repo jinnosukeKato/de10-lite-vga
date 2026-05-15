@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['clk_0',['clk',['../classvga__driver.html#a50da91b765765ac486df1b41692e962f',1,'vga_driver']]],
-  ['clk_5f25mhz_1',['clk_25MHz',['../classvga__driver_1_1RTL.html#a54e1e3c8a17ac5ae23a539758cdcce6b',1,'vga_driver::RTL']]],
-  ['color_5fbar_2',['color_bar',['../classcolor__bar.html',1,'']]]
+  ['blue_0',['blue',['../classvga__driver.html#a7555760a6ca1a2855f889f279e016e89',1,'vga_driver']]]
 ];
