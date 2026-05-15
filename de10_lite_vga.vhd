@@ -32,8 +32,9 @@ architecture RTL of de10_lite_vga is
     );
   end component;
 
-  component color_bar is
+  component character_controller is
     port (
+      clk            : in std_logic;
       horizontal_pos : in unsigned(9 downto 0);
       vertical_pos   : in unsigned(9 downto 0);
       rgb            : out std_logic_vector(2 downto 0)
@@ -59,9 +60,10 @@ begin
     h_sync         => VGA_HS
   );
 
-  u_color_bar : color_bar
+  u_character_controller : character_controller
   port map
   (
+    clk            => MAX10_CLK1_50,
     horizontal_pos => horizontal_pos,
     vertical_pos   => vertical_pos,
     rgb            => rgb

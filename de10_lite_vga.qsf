@@ -90,10 +90,14 @@ set_location_assignment PIN_N1 -to VGA_VS
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_HS
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_VS
 
+# Enable Internal Flash
+set_global_assignment -name INTERNAL_FLASH_UPDATE_MODE "SINGLE IMAGE WITH ERAM"
 
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE character_generator.vhd
+set_global_assignment -name VHDL_FILE character_controller.vhd
 set_global_assignment -name VHDL_FILE vga_driver.vhd
 set_global_assignment -name VHDL_FILE color_bar.vhd
 set_global_assignment -name VHDL_FILE de10_lite_vga.vhd
