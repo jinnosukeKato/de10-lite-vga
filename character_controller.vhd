@@ -32,7 +32,7 @@ begin
   port map
   (
     clk        => clk,
-    ascii_code => std_logic_vector(to_unsigned(65, 8)), --! 今回はAを表示する
+    ascii_code => std_logic_vector('0' & horizontal_pos(9 downto 3)), -- 0 & 水平座標の上位7ビットをASCIIコードとして使用する
     row        => vertical_pos(2 downto 0), --! 垂直座標の下位3ビットを行番号として使用する
     col        => horizontal_pos(2 downto 0), --! 水平座標の下位3ビットを列番号として使用する
     pixel_on   => pixel_on --! ピクセルがオンであれば赤色信号をオンにする
