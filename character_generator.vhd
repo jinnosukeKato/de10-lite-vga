@@ -22,9 +22,10 @@ end character_generator;
 architecture RTL of character_generator is
   type font_rom_type is array (0 to 128 * 8 - 1) of std_logic_vector(7 downto 0); --! 8x8ドットのビットマップを128文字分格納するROM
 
-  signal font_rom                          : font_rom_type; --! フォントROM
-  attribute font_rom_init_attr             : string; --! フォントROM初期化ファイルの属性
-  attribute font_rom_init_attr of font_rom : signal is "font/font.mif"; -- Quartus用のメモリ初期化ファイル(.mif)を属性として指定し，フォントROMを初期化
+  signal font_rom : font_rom_type; --! フォントROM
+  -- ram_init_file属性を使用するという感じなので，ここの名前を変えることはできない
+  attribute ram_init_file             : string; --! フォントROM初期化ファイルの属性
+  attribute ram_init_file of font_rom : signal is "font/font.mif"; -- Quartus用のメモリ初期化ファイル(.mif)を属性として指定し，フォントROMを初期化
 
   signal font_row_addr : integer range 0 to 1023;
   signal font_row      : std_logic_vector(7 downto 0);
